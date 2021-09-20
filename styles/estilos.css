@@ -1,19 +1,55 @@
-main {
-    margin: 0px;
-}
-
-ul {
-    list-style: none;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px;
-    margin: 0px;
-    padding: 10px;
-}
-
-.logo {
-    height: 40px;
-}
+        main {
+            margin: 0px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 0px;
+            margin: 0px;
+            padding: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+        }
+        
+        .botonGenerico {
+            border: 0px;
+            padding: 5px 10px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        
+        .botonGenerico:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        /*crear una clase para botones principales y ajustar sus caracteristicas*/
+        
+        .mainButton {
+            background-color: rgb(65, 204, 52);
+            color: white;
+        }
+        /*agregar un subclase a la clase del boton principal para hacer otros ajustes*/
+        
+        .mainButton:hover {
+            cursor: pointer;
+            box-shadow: 5px 5px gray;
+            transform: scale(1.2);
+        }
+        
+        .secundaryButton {
+            background-color: blue;
+            color: white;
+        }
+        
+        .secundaryButton:hover {
+            cursor: pointer;
+            box-shadow: 5px 5px gray;
+            transform: scale(1.2);
+        }
