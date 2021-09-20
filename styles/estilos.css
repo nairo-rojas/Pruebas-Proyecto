@@ -1,0 +1,15 @@
+main {
+    margin: 0px;
+}
+
+ul {
+    list-style: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+    margin: 0px;
+    padding: 10px;
+}
