@@ -51,5 +51,24 @@
         .secundaryButton:hover {
             cursor: pointer;
             box-shadow: 5px 5px gray;
-            transform: scale(1.2);
+            transform: scale(1.1);
+        }
+        /*crear una clase para el boton buscar y aplicarle unas propiedades*/
+        
+        .buscar {
+            background-color: white;
+            border: 1px solid gray;
+            padding: 4px;
+            border-radius: 8px;
+        }
+        /*crear una subclase para el boton buscar y aplicarle unas propiedades*/
+        
+        .buscar:focus-within {
+            border: 1px solid blue;
+        }
+        /*crear otra subclase para el boton buscar y aplicarle unas propiedades*/
+        
+        .buscar>input {
+            outline: none;
+            border: 0px;
         }
