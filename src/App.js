@@ -1,7 +1,7 @@
 import './styles/App.css';
 import logo from './media/logo.ico';
 import borderCollie from './media/Border-collie.ico';
-import rodesian from './media/Rodesian.ico';
+import rhodesian from './media/Rodesian.ico';
 function App() {
   return (
     <div classNameName="App">
@@ -22,28 +22,28 @@ function App() {
             </li>
         </ul>
       </header>   
-
       <body>
         <section>
             <h1 className="title">Razas de Perros</h1>
             <ul className="bleedCardContainer ">
-                <li className="bleedCard">
-                    <div className="contenedorImagen"><img src={borderCollie} alt=" "></img>
-                    </div>
-                    <span className="bleedTitle">Border-collie</span>
-                </li>
-                <li className="bleedCard ">
-                    <div className="contenedorImagen"><img src={rodesian} alt=" "></img>
-                    </div>
-                    <span className="bleedTitle">Rodesian</span>
-                </li>
+                <CardRazaPerros nombreRaza= "Border-collie" imagen = {borderCollie}/>
+                <CardRazaPerros nombreRaza= "Rhodesia" imagen = {rhodesian}/>
             </ul>
         </section>
         <section></section>
       </body>
-    <footer></footer>
+      <footer></footer>
    </div>
   );
+}
+function CardRazaPerros({nombreRaza, imagen}){
+  return(
+    <li className="bleedCard backGroundCard" >
+     <div className="contenedorImagen"><img src={imagen} alt={nombreRaza}></img>
+      </div>
+      <span className="bleedTitle">{nombreRaza}</span>
+    </li>
+  )
 }
 
 export default App;
