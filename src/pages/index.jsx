@@ -1,11 +1,11 @@
-import './styles/App.css';
-import logo from './media/logo.ico';
-import borderCollie from './media/Border-collie.ico';
-import rhodesian from './media/Rodesian.ico';
-function App() {
-  return (
-    <div classNameName="App">
-      <header>
+import CardRazaPerros from 'components/cardRazaPerros';
+import logo from 'media/logo.ico';
+import borderCollie from 'media/Border-collie.ico';
+import rhodesian from 'media/Rodesian.ico';
+function Index(){
+    return(
+        <div>
+            <header>
         <ul className="navbar">
           <li><img src={logo} alt="imagen" className="logo"></img>
           </li>
@@ -28,22 +28,14 @@ function App() {
             <ul className="bleedCardContainer ">
                 <CardRazaPerros nombreRaza= "Border-collie" imagen = {borderCollie}/>
                 <CardRazaPerros nombreRaza= "Rhodesia" imagen = {rhodesian}/>
+                <CardRazaPerros nombreRaza= "Rhodesia" imagen = {rhodesian}/>
+                <CardRazaPerros nombreRaza= "Rhodesia" imagen = {rhodesian}/>
             </ul>
         </section>
         <section></section>
       </body>
       <footer></footer>
-   </div>
-  );
+    </div>
+    )
 }
-function CardRazaPerros({nombreRaza, imagen}){
-  return(
-    <li className="bleedCard backGroundCard" >
-     <div className="contenedorImagen"><img src={imagen} alt={nombreRaza}></img>
-      </div>
-      <span className="bleedTitle">{nombreRaza}</span>
-    </li>
-  )
-}
-
-export default App;
+export default Index;
