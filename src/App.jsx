@@ -8,12 +8,13 @@ import {
   Route
 }from 'react-router-dom';
 import 'styles/App.css';
-
+import Layout from 'layouts/layout';
 
 function App() {
   return (
     <div classNameName="App">
       <Router>
+          <Layout>
         <Switch>
           <Route path= '/aboutR'>
             <RhodesianInfoPage/>
@@ -25,6 +26,7 @@ function App() {
             <Index/>
           </Route>
         </Switch>
+          </Layout>
       </Router>
     </div>
   );

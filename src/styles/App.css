@@ -4,9 +4,25 @@ main {
 
 ul {
   list-style: none;
+  padding: 0px;
+  margin: 0px;
 }
+.mainContainer{
+  display: flex;
+  flex-direction: column; 
+  height: 100vh;
+ }
 
-.navbar {
+ .mainContainer > main{
+   height: 100%;
+ }
+
+ .mainContainer > footer{
+   background-color: red;
+   padding: 10px;
+ }
+
+ .navbar {
   display: flex;
   justify-content: space-between;
   padding: 0px;
