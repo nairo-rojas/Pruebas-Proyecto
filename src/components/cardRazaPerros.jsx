@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 function CardRazaPerros({nombreRaza, imagen}){
     return(
-      <li className="bleedCard backGroundCard" >
+      <li className="bleedCard" >
         <Link to='/aboutB'>
        <div className="contenedorImagen"><img src={imagen} alt={nombreRaza}/>
         </div>

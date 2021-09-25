@@ -16,10 +16,10 @@ function App() {
       <Router>
           <Layout>
         <Switch>
-          <Route path= '/aboutR'>
+          <Route path= '/Rhodesian'>
             <RhodesianInfoPage/>
           </Route>
-          <Route path= '/aboutB'>
+          <Route path= '/Border'>
             <BorderCollieInfoPage/>
           </Route>
           <Route path= '/'>
