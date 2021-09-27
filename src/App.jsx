@@ -6,14 +6,14 @@ import {
   Route
 } from 'react-router-dom';
 import Index from 'pages/index';
-import Prueba from 'pages/prueba';
+import Prueba from 'pages/404';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path='/prueba'>
+          <Route path='/404'>
             <Prueba />
           </Route>
           <Route path='/'>
