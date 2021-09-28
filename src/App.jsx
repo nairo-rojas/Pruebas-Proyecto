@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Index from 'pages/index';
 import Prueba from 'pages/404';
+import Login from 'pages/login'
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         <Switch>
           <Route path='/404'>
             <Prueba />
+          </Route>
+          <Route path='/login'>
+            <Login />
           </Route>
           <Route path='/'>
             <Index />
