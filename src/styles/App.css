@@ -1,38 +1,4 @@
-:root {
-  --fuenteHeading: 'PT sans', 'sans-serif';
-  --fuenteParrafos: 'Opens Sans', 'sans-serif';
-
-  --primario: #1c3859;
-  --secundario: #abc274;
-  --terceario: #62635d;
-}
-
-html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-.App {
-  height: 100vh;
-  text-align: center;
-}
-
-header {
-  height: 10%;
-  background-color: gray;
-}
-
-main {
-  height: 80%;
-}
-
-footer {
-  height: 10%;
-  background-color: gray;
-}
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
