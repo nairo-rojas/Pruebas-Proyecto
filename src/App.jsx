@@ -5,9 +5,8 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import Index from 'pages/index';
-import Error404 from 'pages/404';
-import Registration from 'pages/registration';
+import Index from 'pages/index'
+import Login from 'pages/login'
 
 function App() {
   return (
@@ -19,6 +18,9 @@ function App() {
           </Route>
           <Route path='/404'>
             <Error404 />
+          </Route>
+          <Route path='/login'>
+            <Login />
           </Route>
           <Route path='/'>
             <Index />
