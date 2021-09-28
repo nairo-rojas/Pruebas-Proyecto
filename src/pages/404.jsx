@@ -1,11 +1,11 @@
 
 
-const Prueba = () => {
+const Error404 = () => {
   return(
       <div>
-        Prueba de paginación
+        Prueba de error 404
       </div>
   )
 }
 
-export default Prueba
+export default Error404

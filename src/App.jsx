@@ -6,15 +6,19 @@ import {
   Route
 } from 'react-router-dom';
 import Index from 'pages/index';
-import Prueba from 'pages/404';
+import Error404 from 'pages/404';
+import Registration from 'pages/registration';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path='/registration'>
+            <Registration />
+          </Route>
           <Route path='/404'>
-            <Prueba />
+            <Error404 />
           </Route>
           <Route path='/'>
             <Index />
