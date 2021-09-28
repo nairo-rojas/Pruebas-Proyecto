@@ -9,7 +9,7 @@ Proyecto en el programa del MinTIC en asociación con la universidad de Antioqui
 - Javascript
 - Framework React-js
 - Node - Express
-- MOngo DB
+- Mongo DB
 - Euruko
 
 ---
