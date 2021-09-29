@@ -5,25 +5,61 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import Index from 'pages/index'
-import Login from 'pages/login'
+
+import PrivateLayout from 'layouts/PrivateLayout';
+import AuthLayout from 'layouts/AuthLayout';
+import PublicLayout from 'layouts/PublicLayout';
+import Index from 'pages/index';
+import Login from 'pages/login';
+import Registration from 'pages/registration';
+import Admin from 'pages/admin/Index';
+import Productos from 'pages/admin/Productos';
+import Usuarios from 'pages/admin/Usuarios';
+import Ventas from 'pages/admin/Ventas';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path='/registration'>
-            <Registration />
+          <Route path={['/admin/', '/admin/Productos', '/admin/Usuarios', '/admin/Ventas']}>
+            <PrivateLayout>
+              <Switch>
+                <Route path='/admin/Productos'>
+                  <Productos />
+                </Route>
+                <Route path='/admin/Usuarios'>
+                  <Usuarios />
+                </Route>
+                <Route path='/admin/Ventas'>
+                  <Ventas />
+                </Route>
+                <Route path='/admin'>
+                  <Admin />
+                </Route>
+              </Switch>
+            </PrivateLayout>
           </Route>
-          <Route path='/404'>
-            <Error404 />
+          <Route path={['/login', '/resgistration']}>
+            <AuthLayout>
+              <Switch>
+                <Route path='/login'>
+                  <Login />
+                </Route>
+                <Route path='/registration'>
+                  <Registration />
+                </Route>
+              </Switch>
+            </AuthLayout>
           </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/'>
-            <Index />
+          <Route path={['/']}>
+            <PublicLayout>
+              <Switch>
+              <Route path='/'>
+                  <Index />
+                </Route>
+              </Switch>
+            </PublicLayout>
           </Route>
         </Switch>
       </Router>
