@@ -1,21 +1,18 @@
-//import logo from './logo.svg';
-import './styles/App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom';
 
+import React, {useState, useEffect} from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import './styles/App.css';
 import PrivateLayout from 'layouts/PrivateLayout';
 import AuthLayout from 'layouts/AuthLayout';
 import PublicLayout from 'layouts/PublicLayout';
 import Index from 'pages/index';
-import Login from 'pages/login';
-import Registration from 'pages/registration';
-import Admin from 'pages/admin/Index';
+import Admin from 'pages/admin/index';
 import Productos from 'pages/admin/Productos';
 import Usuarios from 'pages/admin/Usuarios';
-import Ventas from 'pages/admin/Ventas';
+import Ventas from 'pages/admin/Ventas'
+import Autenticacion from 'pages/auth/index';
+import Login from 'pages/auth/login';
+import Registro from 'pages/auth/registro';
 
 function App() {
   return (
@@ -36,18 +33,18 @@ function App() {
                 </Route>
                 <Route path='/admin'>
                   <Admin />
-                </Route>
+              </Route>
               </Switch>
             </PrivateLayout>
           </Route>
-          <Route path={['/login', '/resgistration']}>
+          <Route path={['/login', '/registro']}>
             <AuthLayout>
               <Switch>
                 <Route path='/login'>
                   <Login />
                 </Route>
-                <Route path='/registration'>
-                  <Registration />
+                <Route path='/registro'>
+                  <Registro />
                 </Route>
               </Switch>
             </AuthLayout>
