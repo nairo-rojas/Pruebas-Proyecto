@@ -6,13 +6,12 @@ import PrivateLayout from 'layouts/PrivateLayout';
 import AuthLayout from 'layouts/AuthLayout';
 import PublicLayout from 'layouts/PublicLayout';
 import Index from 'pages/index';
-import Admin from 'pages/admin/index';
+import Admin from 'pages/admin/Index';
 import Productos from 'pages/admin/Productos';
 import Usuarios from 'pages/admin/Usuarios';
 import Ventas from 'pages/admin/Ventas'
-import Autenticacion from 'pages/auth/index';
-import Login from 'pages/auth/login';
-import Registro from 'pages/auth/registro';
+import Login from 'pages/auth/Login';
+import Registro from 'pages/auth/Registro';
 
 function App() {
   return (
@@ -37,13 +36,13 @@ function App() {
               </Switch>
             </PrivateLayout>
           </Route>
-          <Route path={['/login', '/registro']}>
+          <Route path={['/Login', '/Registro']}>
             <AuthLayout>
               <Switch>
-                <Route path='/login'>
+                <Route path='/Login'>
                   <Login />
                 </Route>
-                <Route path='/registro'>
+                <Route path='/Registro'>
                   <Registro />
                 </Route>
               </Switch>
