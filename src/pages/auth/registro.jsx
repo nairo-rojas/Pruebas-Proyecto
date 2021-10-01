@@ -15,7 +15,7 @@ const Registro = () => {
               autoComplete='email'
               required
               className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-              placeholder='Daniel'
+              placeholder='Nairo'
             />
           </label>
           <label htmlFor='apellido'>
@@ -25,7 +25,7 @@ const Registro = () => {
               type='text'
               required
               className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-              placeholder='Saldarriaga'
+              placeholder='Rojas'
             />
           </label>
           <label htmlFor='telefono'>
@@ -35,7 +35,7 @@ const Registro = () => {
               type='tel'
               required
               className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-              placeholder='3213213210'
+              placeholder='3125768905'
             />
           </label>
           <label htmlFor='nacimiento'>
