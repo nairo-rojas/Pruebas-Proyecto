@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.3.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
+    "@heroicons/react": "^1.0.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -39,8 +43,10 @@
     ]
   },
   "devDependencies": {
+    "@iconify/react": "^3.0.1",
     "autoprefixer": "^9",
     "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16",
+    "tailwindcss-text-indent": "^1.0.2"
   }
 }

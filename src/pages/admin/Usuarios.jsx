@@ -189,7 +189,7 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla, listaUsuarios, setUsuario
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             type='number'
             min={1}
-            max={50}
+            max={100}
             placeholder= '45'
            />
         </label>
