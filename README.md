@@ -3,6 +3,7 @@
 Proyecto en el programa del MinTIC en asociación con la universidad de Antioquia en el ciclo 3, para aprendizaje del proceso de desarrollo de software.
 
 **Skills:**
+<<<<<<< HEAD
 * Metodología Scrum
 * HTML5 y CSS3
 * Javascript
