@@ -10,8 +10,8 @@ import Admin from 'pages/admin/Index';
 import Productos from 'pages/admin/Productos';
 import Usuarios from 'pages/admin/Usuarios';
 import Ventas from 'pages/admin/Ventas'
-import Login from 'pages/auth/Login';
-import Registro from 'pages/auth/Registro';
+import Login from 'pages/auth/login';
+import Registro from 'pages/auth/registro';
 
 function App() {
   return (

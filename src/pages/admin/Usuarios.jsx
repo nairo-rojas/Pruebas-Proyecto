@@ -10,9 +10,18 @@ const UsuariosBackend = [
     tipo: 'CC',
     cedula: '79171305',
     telefono: '3207259876',
-    edad: 45
-
+    rol:'administrador',
+    estado: 'autorizado'
   },
+  {
+    nombre: 'Camilo',
+    apellido: 'Fernandez',
+    tipo: 'CC',
+    cedula: '5678907565',
+    telefono: '3215987667',
+    rol:'usuario',
+    estado: 'pendiente'
+  }
  ];
 
 const Usuarios = () => {
@@ -69,7 +78,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
     console.log('este es el listado de Usuarios en el componente de tabla', listaUsuarios);
   }, [listaUsuarios]);
   return (
-    <div className='flex flex-col items-center justify-center m-4, p-4 border border-gray-700'>
+    <div className='flex flex-col items-center justify-center m-4 p-4'>
       <h2 className='text-2xl font-extrabold text-gray-800'>Todos los Usuarios</h2>
       <table>
         <thead>
@@ -79,7 +88,8 @@ const TablaUsuarios = ({ listaUsuarios }) => {
             <th>Tio documento de Usuario</th>
             <th>Cedula del Usuario</th>
             <th>Telefono del Usuario</th>
-            <th>Edad del Usuario</th>
+            <th>Rol Usuario</th>
+            <th>Estado Usuario</th>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +101,8 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                 <td>{Usuario.tipo}</td>
                 <td>{Usuario.cedula}</td>
                 <td>{Usuario.telefono}</td>
-                <td>{Usuario.edad}</td>
+                <td>{Usuario.rol}</td>
+                 <td>{Usuario.estado}</td>
               </tr>
             );
           })}
@@ -183,7 +194,7 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla, listaUsuarios, setUsuario
           />
         </label>
         <label className='flex flex-col' htmlFor='edad'>
-          Teléfono del Usuario
+          Edad Usuario
           <input
             name='edad'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -192,6 +203,37 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla, listaUsuarios, setUsuario
             max={100}
             placeholder= '45'
            />
+        </label>
+        <label className='flex flex-col' htmlFor='rol'>
+          Rol del Usuario
+          <select
+            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+            name='rol'
+            required
+            defaultValue={0}
+          >
+            <option disabled value={0}>
+              Seleccione una opción
+            </option>
+            <option>Administrador</option>
+            <option>Vendedor</option>
+            </select>
+        </label>
+        <label className='flex flex-col' htmlFor='estado'>
+          Tipo de documento del Usuario
+          <select
+            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+            name='estado'
+            required
+            defaultValue={0}
+          >
+            <option disabled value={0}>
+              Seleccione una opción
+            </option>
+            <option>Pendiente</option>
+            <option>Autorizado</option>
+            <option>No Autorizado</option>
+            </select>
         </label>
         
         <button
