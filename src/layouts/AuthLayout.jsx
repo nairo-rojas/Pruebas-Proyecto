@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from 'media/logoAnt.ico';
+import Logo from 'media/logo.ico';
 import { Link } from 'react-router-dom';
 
 const AuthLayout = ({ children }) => {
