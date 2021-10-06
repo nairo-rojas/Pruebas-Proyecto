@@ -1,7 +1,7 @@
 import React from 'react'
 import ImagenLogo from 'components/ImagenLogo';
 import { Link } from 'react-router-dom';
-import Ruta from 'components/Ruta';
+import Ruta from 'components/RutaSidebar';
 
 
 const Sidebar = () => {

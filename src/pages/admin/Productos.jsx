@@ -1,52 +1,39 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-const productosBackend = [
-  {
-    nombre: 'mozarela',
-    tipo: 'tajado',
-    medida: 'libra',
-    cantidad: 3
-  },
-  {
-    nombre: 'pera',
-    tipo: 'entero',
-    medida: 'kilo',
-    cantidad: 2
-  },
-  {
-    nombre: 'doblecrema',
-    tipo: 'al vacío',
-    medida: 'bloque',
-    cantidad: 1
-  },
-  {
-    nombre: 'campesino',
-    tipo: 'natural',
-    medida: 'media libra',
-    cantidad: 3
-  },
- ];
 
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [Productos, setProductos] = useState([]);
-  const [textoBoton, setTextoBoton] = useState('Crear Nuevo Productos');
+  const [textoBoton, setTextoBoton] = useState('Crear Nuevo producto');
   const [colorBoton, setColorBoton] = useState('indigo');
 
   useEffect(() => {
-    //obtener lista de Productoss desde el backend
-    setProductos(productosBackend);
-  }, []);
+    const obtenerProductos = async () => {
+      const options = { method: 'GET', url: 'https://vast-waters-45728.herokuapp.com/producto/' };
+      await axios
+        .request(options)
+        .then(function (response) {
+          setProductos(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    };
+
+    //obtener lista de productos desde el backend
+    if (mostrarTabla) {
+      obtenerProductos();
+    }
+  }, [mostrarTabla]);
 
   useEffect(() => {
     if (mostrarTabla) {
-      setTextoBoton('Crear Nuevo Producto');
+      setTextoBoton('Crear Nuevo producto');
       setColorBoton('indigo');
     } else {
-      setTextoBoton('Mostrar Todos los Productos');
+      setTextoBoton('Mostrar Todos los productos');
       setColorBoton('green');
     }
   }, [mostrarTabla]);
@@ -54,7 +41,7 @@ const Productos = () => {
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col'>
         <h2 className='text-3xl font-extrabold text-gray-900'>
-          Página de administración de Productos
+          Página de administración de productos
         </h2>
         <button
           onClick={() => {
@@ -80,29 +67,28 @@ const Productos = () => {
 };
 
 const TablaProductos = ({ listaProductos }) => {
+  
   useEffect(() => {
-    console.log('este es el listado de Productos en el componente de tabla', listaProductos);
+    console.log('Este es el listado de Productos en el componente de tabla', listaProductos);
   }, [listaProductos]);
   return (
     <div className='flex flex-col items-center justify-center'>
-      <h2 className='text-2xl font-extrabold text-gray-800'>Todos los Productos</h2>
+      <h2 className='text-2xl font-extrabold text-gray-800'>Todos los productos</h2>
       <table>
         <thead>
           <tr>
-            <th>Nombre del Producto</th>
-            <th>Tipo de Producto</th>
-            <th>Medida del Producto</th>
-            <th>Cantidad del Producto</th>
+            <th>Nombre del producto</th>
+            <th>Marca del producto</th>
+            <th>Cantidad del producto</th>
           </tr>
         </thead>
         <tbody>
-          {listaProductos.map((producto) => {
+          {listaProductos.map((Producto) => {
             return (
               <tr>
-                <td>{producto.nombre}</td>
-                <td>{producto.tipo}</td>
-                <td>{producto.medida}</td>
-                <td>{producto.cantidad}</td>
+                <td>{Producto.name}</td>
+                <td>{Producto.brand}</td>
+                <td>{Producto.quantity}</td>
               </tr>
             );
           })}
@@ -115,73 +101,75 @@ const TablaProductos = ({ listaProductos }) => {
 const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProductos }) => {
   const form = useRef(null);
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
-    
+
     const nuevoProducto = {};
     fd.forEach((value, key) => {
       nuevoProducto[key] = value;
     });
 
+    const options = {
+      method: 'POST',
+      url: 'https://vast-waters-45728.herokuapp.com/producto/create',
+      headers: { 'Content-Type': 'application/json' },
+      data: { name: nuevoProducto.name, brand: nuevoProducto.brand, quantity: nuevoProducto.quantity },
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success('Producto agregado con éxito');
+      })
+      .catch(function (error) {
+        console.error(error);
+        toast.error('Error creando un producto');
+      });
+
     setMostrarTabla(true);
-    setProductos([...listaProductos, nuevoProducto]);
-    // identificar el caso de éxito y mostrar un toast de éxito
-    toast.success('Producto agregado con éxito');
-    // identificar el caso de error y mostrar un toast de error
-    // toast.error('Error creando un Productos');
   };
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo Producto</h2>
+      <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo producto</h2>
       <form ref={form} onSubmit={submitForm} className='flex flex-col'>
-        <label className='flex flex-col' htmlFor='nombre'>
-          Nombre del Producto
+        <label className='flex flex-col' htmlFor='name'>
+          Nombre del producto
           <input
-            name='nombre'
+            name='name'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             type='text'
-            placeholder='mozarela'
+            placeholder='Mozarela'
             required
           />
         </label>
-        <label className='flex flex-col' htmlFor='tipo'>
-          Tipo de Producto
+        <label className='flex flex-col' htmlFor='marca'>
+          Marca del producto
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            name='tipo'
+            name='brand'
             required
             defaultValue={0}
           >
             <option disabled value={0}>
               Seleccione una opción
             </option>
-            <option>Al vacío</option>
-            <option>Entero</option>
             <option>Tajado</option>
-            <option>Natural</option>
-            <option>Bajo en grasa</option>
-            </select>
+            <option>Entero</option>
+            <option>Al Vacío</option>
+            <option>Normal</option>
+           </select>
         </label>
-        <label className='flex flex-col' htmlFor='medida'>
-          Medida del Producto
+        <label className='flex flex-col' htmlFor='quantity'>
+          Cantidad del producto
           <input
-            name='medida'
-            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            type='text'
-            placeholder='libra'
-            required
-          />
-        </label>
-        <label className='flex flex-col' htmlFor='cantidad'>
-        Cantidad del Producto
-          <input
-            name='cantidad'
+            name='quantity'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             type='number'
             min={1}
-            max={50}
+            max={1000}
             placeholder='5'
             required
           />
@@ -191,7 +179,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
           type='submit'
           className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
         >
-          Guardar producto
+          Guardar Producto
         </button>
       </form>
     </div>
