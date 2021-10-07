@@ -5,17 +5,21 @@ const SidebarResponsive = () => {
   const [mostrarNavegacion, setMostrarNavegacion] = useState(false);
   return (
     <div
-      className='sm:hidden'
+      className='lg:hidden'
       onClick={() => {
         setMostrarNavegacion(!mostrarNavegacion);
       }}
     >
-      <i className={`mx-2 fas fa-${mostrarNavegacion ? 'times' : 'bars'} hover:text-yellow-600`} />
+      <i
+        className={`mx-2 fas fa-${
+          mostrarNavegacion ? 'times' : 'bars'
+        } hover:text-yellow-600 cursor-pointer`}
+      />
       {mostrarNavegacion && (
         <ul className='bg-gray-900'>
           <ResponsiveRoute nombre='Vehículos' ruta='/admin/Productos' />
-          <ResponsiveRoute nombre='Ventas' ruta='/admin/Ventas' />
-          <ResponsiveRoute nombre='Usuarios' ruta='/admin/Usuarios' />
+          <ResponsiveRoute nombre='Ventas' ruta='/admin/ventas' />
+          <ResponsiveRoute nombre='Usuarios' ruta='/admin/usuarios' />
         </ul>
       )}
     </div>
