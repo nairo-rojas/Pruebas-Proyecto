@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [productos, setProductos] = useState([]);
-  const [textoBoton, setTextoBoton] = useState('Crear Nuevo Producto');
+  const [textoBoton, setTextoBoton] = useState('Crear Nuevo producto');
   const [colorBoton, setColorBoton] = useState('indigo');
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
@@ -21,7 +21,7 @@ const Productos = () => {
   }, [ejecutarConsulta]);
 
   useEffect(() => {
-    //obtener lista de Productos desde el backend
+    //obtener lista de productos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
@@ -29,10 +29,10 @@ const Productos = () => {
 
   useEffect(() => {
     if (mostrarTabla) {
-      setTextoBoton('Crear Nuevo Producto');
+      setTextoBoton('Crear Nuevo producto');
       setColorBoton('indigo');
     } else {
-      setTextoBoton('Mostrar Todos los Productos');
+      setTextoBoton('Mostrar Todos los productos');
       setColorBoton('green');
     }
   }, [mostrarTabla]);
@@ -40,7 +40,7 @@ const Productos = () => {
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col w-full'>
         <h2 className='text-3xl font-extrabold text-gray-900'>
-          Página de administración de Productos
+          Página de administración de productos
         </h2>
         <button
           onClick={() => {
@@ -85,23 +85,23 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
         placeholder='Buscar'
         className='border-2 border-gray-700 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500'
       />
-      <h2 className='text-2xl font-extrabold text-gray-800'>Todos los Productos</h2>
+      <h2 className='text-2xl font-extrabold text-gray-800'>Todos los productos</h2>
       <div className='hidden md:flex w-full'>
         <table className='table'>
           <thead>
             <tr>
-              <th>Nombre del Producto</th>
-              <th>Marca del Producto</th>
-              <th>Modelo del Producto</th>
+              <th>Nombre del producto</th>
+              <th>Marca del producto</th>
+              <th>Modelo del producto</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {productosFiltrados.map((producto) => {
+            {productosFiltrados.map((Producto) => {
               return (
                 <FilaProducto
                   key={nanoid()}
-                  producto={producto}
+                  Producto={Producto}
                   setEjecutarConsulta={setEjecutarConsulta}
                 />
               );
@@ -128,6 +128,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
+    _id: producto._id,
     name: producto.name,
     brand: producto.brand,
     model: producto.model,
@@ -137,21 +138,21 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
     //enviar la info al backend
     const options = {
       method: 'PATCH',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/update/',
+      url: `http://localhost:5000/Productos/${producto._id}/`,
       headers: { 'Content-Type': 'application/json' },
-      data: { ...infoNuevoProducto, id: producto._id },
+      data: { ...infoNuevoProducto },
     };
 
     await axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        toast.success('Producto modificado con éxito');
+        toast.success('producto modificado con éxito');
         setEdit(false);
         setEjecutarConsulta(true);
       })
       .catch(function (error) {
-        toast.error('Error modificando el Producto');
+        toast.error('Error modificando el producto');
         console.error(error);
       });
   };
@@ -159,7 +160,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const eliminarProducto = async () => {
     const options = {
       method: 'DELETE',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/delete/',
+      url: 'http://localhost:5000/Productos/eliminar/',
       headers: { 'Content-Type': 'application/json' },
       data: { id: producto._id },
     };
@@ -168,12 +169,12 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        toast.success('Producto eliminado con éxito');
+        toast.success('productos eliminado con éxito');
         setEjecutarConsulta(true);
       })
       .catch(function (error) {
         console.error(error);
-        toast.error('Error eliminando el Producto');
+        toast.error('Error eliminando el producto');
       });
     setOpenDialog(false);
   };
@@ -182,6 +183,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
     <tr>
       {edit ? (
         <>
+          <td>{infoNuevoProducto._id}</td>
           <td>
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -213,6 +215,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
         </>
       ) : (
         <>
+          <td>{producto._id.slice(20)}</td>
           <td>{producto.name}</td>
           <td>{producto.brand}</td>
           <td>{producto.model}</td>
@@ -237,13 +240,13 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             </>
           ) : (
             <>
-              <Tooltip title='Editar Producto' arrow>
+              <Tooltip title='Editar producto' arrow>
                 <i
                   onClick={() => setEdit(!edit)}
                   className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500'
                 />
               </Tooltip>
-              <Tooltip title='Eliminar Producto' arrow>
+              <Tooltip title='Eliminar producto' arrow>
                 <i
                   onClick={() => setOpenDialog(true)}
                   className='fas fa-trash text-red-700 hover:text-red-500'
@@ -255,7 +258,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
         <Dialog open={openDialog}>
           <div className='p-8 flex flex-col'>
             <h1 className='text-gray-900 text-2xl font-bold'>
-              ¿Está seguro de querer eliminar el Producto?
+              ¿Está seguro de querer eliminar el producto?
             </h1>
             <div className='flex w-full items-center justify-center my-4'>
               <button
@@ -292,7 +295,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
 
     const options = {
       method: 'POST',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/create',
+      url: 'http://localhost:5000/Productos/nuevo/',
       headers: { 'Content-Type': 'application/json' },
       data: { name: nuevoProducto.name, brand: nuevoProducto.brand, model: nuevoProducto.model },
     };
@@ -301,11 +304,11 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        toast.success('Producto agregado con éxito');
+        toast.success('producto agregado con éxito');
       })
       .catch(function (error) {
         console.error(error);
-        toast.error('Error creando un Producto');
+        toast.error('Error creando un producto');
       });
 
     setMostrarTabla(true);
@@ -313,10 +316,10 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo Producto</h2>
+      <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo producto</h2>
       <form ref={form} onSubmit={submitForm} className='flex flex-col'>
         <label className='flex flex-col' htmlFor='nombre'>
-          Nombre del Producto
+          Nombre del producto
           <input
             name='name'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -326,7 +329,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
           />
         </label>
         <label className='flex flex-col' htmlFor='marca'>
-          Marca del Producto
+          Marca del producto
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             name='brand'
@@ -344,7 +347,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
           </select>
         </label>
         <label className='flex flex-col' htmlFor='modelo'>
-          Modelo del Producto
+          Modelo del producto
           <input
             name='model'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
