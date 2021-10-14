@@ -4,26 +4,26 @@
 @tailwind utilities;
 
 
-.table{
+.tabla{
     width: 100%;
     margin: 12px;
 }
-.table td, 
-.table th {
+.tabla td, 
+.tabla th {
     padding: 8px;
     border: 1px solid #ddd;
  }
- .table th{
+ .tabla th{
      background-color: #04aa46;
      color: white;
      padding-top: 12px;
      padding-bottom: 12px;
      text-align: left;
  }
- .table tr:nth-child(event){
+ .tabla tr:nth-child(event){
 background-color: #f2f2f2;
  }
- .table tr:hover{
+ .tabla tr:hover{
      background-color: #ddd;
      cursor: pointer;
  }
