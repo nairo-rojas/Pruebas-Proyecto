@@ -2,23 +2,22 @@ import React, { useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
-import { obtenerProducto, crearProducto, editarProducto, eliminarProducto } from 'utils/api';
+import { obtenerProductos, crearProducto, editarProducto, eliminarProducto } from 'utils/api';
 import ReactLoading from 'react-loading';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [productos, setProductos] = useState([]);
-  const [textoBoton, setTextoBoton] = useState('Crear Nuevo Productos');
+  const [textoBoton, setTextoBoton] = useState('Crear Nuevo Producto');
   const [colorBoton, setColorBoton] = useState('indigo');
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchProducto = async () => {
+    const fetchProductos = async () => {
       setLoading(true);
-      await obtenerProducto(
+      await obtenerProductos(
         (response) => {
           console.log('la respuesta que se recibio fue', response);
           setProductos(response.data);
@@ -33,12 +32,12 @@ const Productos = () => {
     };
     console.log('consulta', ejecutarConsulta);
     if (ejecutarConsulta) {
-      fetchProducto();
+      fetchProductos();
     }
   }, [ejecutarConsulta]);
 
   useEffect(() => {
-    //obtener lista de Productoss desde el backend
+    //obtener lista de productos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
@@ -49,7 +48,7 @@ const Productos = () => {
       setTextoBoton('Crear Nuevo Producto');
       setColorBoton('indigo');
     } else {
-      setTextoBoton('Mostrar Todos los Productos');
+      setTextoBoton('Mostrar Todos los productos');
       setColorBoton('green');
     }
   }, [mostrarTabla]);
@@ -57,7 +56,7 @@ const Productos = () => {
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col w-full'>
         <h2 className='text-3xl font-extrabold text-gray-900'>
-          Página de administración de Productos
+          Página de administración de productos
         </h2>
         <button
           onClick={() => {
@@ -107,7 +106,7 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
         placeholder='Buscar'
         className='border-2 border-gray-700 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500'
       />
-      <h2 className='text-2xl font-extrabold text-gray-800'>Todos los Productos</h2>
+      <h2 className='text-2xl font-extrabold text-gray-800'>Todos los productos</h2>
       <div className='hidden md:flex w-full'>
         {loading ? (
           <ReactLoading type='cylon' color='#abc123' height={667} width={375} />
@@ -116,9 +115,9 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Nombre del Producto</th>
-                <th>Tipo de Producto</th>
-                <th>Cantidad de Producto</th>
+                <th>Nombre del producto</th>
+                <th>Presentación del producto</th>
+                <th>Empaque del producto</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -141,8 +140,8 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
           return (
             <div className='bg-gray-400 m-2 shadow-xl flex flex-col p-2 rounded-xl'>
               <span>{el.name}</span>
-              <span>{el.type}</span>
-              <span>{el.amount}</span>
+              <span>{el.presentation}</span>
+              <span>{el.package}</span>
             </div>
           );
         })}
@@ -157,8 +156,8 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
     _id: producto._id,
     name: producto.name,
-    type: producto.type,
-    amount: producto.amount
+    presentation: producto.presentation,
+    package: producto.package,
   });
 
   const actualizarProducto = async () => {
@@ -168,33 +167,33 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
       producto._id,
       {
         name: infoNuevoProducto.name,
-        type: infoNuevoProducto.type,
-        amount: infoNuevoProducto.amount
+        presentation: infoNuevoProducto.presentation,
+        package: infoNuevoProducto.package,
       },
       (response) => {
         console.log(response.data);
-        toast.success('Productos modificado con éxito');
+        toast.success('Producto modificado con éxito');
         setEdit(false);
         setEjecutarConsulta(true);
       },
       (error) => {
-        toast.error('Error modificando el Productos');
+        toast.error('Error modificando el producto');
         console.error(error);
       }
     );
   };
 
-  const deleteProducto = async () => {
+  const deleteProduct = async () => {
     await eliminarProducto(
       producto._id,
       (response) => {
         console.log(response.data);
-        toast.success('Productos eliminado con éxito');
+        toast.success('producto eliminado con éxito');
         setEjecutarConsulta(true);
       },
       (error) => {
         console.error(error);
-        toast.error('Error eliminando el Productos');
+        toast.error('Error eliminando el producto');
       }
     );
 
@@ -218,9 +217,9 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoProducto.type}
+              value={infoNuevoProducto.presentation}
               onChange={(e) =>
-                setInfoNuevoProducto({ ...infoNuevoProducto, type: e.target.value })
+                setInfoNuevoProducto({ ...infoNuevoProducto, presentation: e.target.value })
               }
             />
           </td>
@@ -228,9 +227,9 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoProducto.amount}
+              value={infoNuevoProducto.package}
               onChange={(e) =>
-                setInfoNuevoProducto({ ...infoNuevoProducto, amount: e.target.value })
+                setInfoNuevoProducto({ ...infoNuevoProducto, package: e.target.value })
               }
             />
           </td>
@@ -239,8 +238,8 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
         <>
           <td>{producto._id.slice(20)}</td>
           <td>{producto.name}</td>
-          <td>{producto.type}</td>
-          <td>{producto.amount}</td>
+          <td>{producto.presentation}</td>
+          <td>{producto.package}</td>
         </>
       )}
       <td>
@@ -262,13 +261,13 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             </>
           ) : (
             <>
-              <Tooltip title='Editar Productos' arrow>
+              <Tooltip title='Editar Producto' arrow>
                 <i
                   onClick={() => setEdit(!edit)}
                   className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500'
                 />
               </Tooltip>
-              <Tooltip title='Eliminar Productos' arrow>
+              <Tooltip title='Eliminar Producto' arrow>
                 <i
                   onClick={() => setOpenDialog(true)}
                   className='fas fa-trash text-red-700 hover:text-red-500'
@@ -280,11 +279,11 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
         <Dialog open={openDialog}>
           <div className='p-8 flex flex-col'>
             <h1 className='text-gray-900 text-2xl font-bold'>
-              ¿Está seguro de querer eliminar el Productos?
+              ¿Está seguro de querer eliminar el producto?
             </h1>
             <div className='flex w-full items-center justify-center my-4'>
               <button
-                onClick={() => deleteProducto()}
+                onClick={() => deleteProduct()}
                 className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
               >
                 Sí
@@ -318,8 +317,8 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
     await crearProducto(
       {
         name: nuevoProducto.name,
-        type: nuevoProducto.type,
-        amount: nuevoProducto.amount
+        presentation: nuevoProducto.presentation,
+        package: nuevoProducto.package,
       },
       (response) => {
         console.log(response.data);
@@ -327,37 +326,18 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
       },
       (error) => {
         console.error(error);
-        toast.error('Error creando un Producto');
+        toast.error('Error creando un producto');
       }
     );
-
-    // const options = {
-    //   method: 'POST',
-    //   url: 'http://localhost:5000/productos/nuevo/',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   data: { name: nuevoProducto.name, brand: nuevoProducto.brand, model: nuevoProducto.model },
-    // };
-
-    // await axios
-    //   .request(options)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     toast.success('Productos agregado con éxito');
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //     toast.error('Error creando un Productos');
-    //   });
-
-    setMostrarTabla(true);
+  setMostrarTabla(true);
   };
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo Producto</h2>
+      <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo producto</h2>
       <form ref={form} onSubmit={submitForm} className='flex flex-col'>
         <label className='flex flex-col' htmlFor='nombre'>
-          Nombre del Producto
+          Nombre del producto
           <input
             name='name'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -366,11 +346,11 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
             required
           />
         </label>
-        <label className='flex flex-col' htmlFor='tipo'>
-          Tipo de Producto
+        <label className='flex flex-col' htmlFor='presentation'>
+         Presentación del producto
           <select
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            name='type'
+            name='presentation'
             required
             defaultValue={0}
           >
@@ -379,19 +359,18 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
             </option>
             <option>Entero</option>
             <option>Tajado</option>
-            <option>Natural</option>
-            <option>Al vacío</option>
-            </select>
+            <option>Borona</option>
+            <option>Fino</option>
+            <option>Para untar</option>
+          </select>
         </label>
-        <label className='flex flex-col' htmlFor='tipo'>
-          Tipo del Productos
+        <label className='flex flex-col' htmlFor='package'>
+          Empaque del producto
           <input
-            name='amount'
+            name='package'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            type='number'
-            min={1}
-            //max={2022}
-            placeholder='2'
+            type='text'
+            placeholder='Vacío'
             required
           />
         </label>
@@ -400,7 +379,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
           type='submit'
           className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
         >
-          Guardar Producto
+          Guardar producto
         </button>
       </form>
     </div>

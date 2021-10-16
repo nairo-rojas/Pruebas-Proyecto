@@ -80,14 +80,14 @@ const TablaUsuarios = ({ listaUsuarios }) => {
   return (
     <div className='flex flex-col items-center justify-center m-4 p-4'>
       <h2 className='text-2xl font-extrabold text-gray-800'>Todos los Usuarios</h2>
-      <table>
+      <table className='tabla'>
         <thead>
           <tr>
             <th>Nombre del Usuario</th>
             <th>Apellido de Usuario</th>
-            <th>Tio documento de Usuario</th>
+            <th>Tipo documento de Usuario</th>
             <th>Cedula del Usuario</th>
-            <th>Telefono del Usuario</th>
+            <th>Teléfono del Usuario</th>
             <th>Rol Usuario</th>
             <th>Estado Usuario</th>
           </tr>
