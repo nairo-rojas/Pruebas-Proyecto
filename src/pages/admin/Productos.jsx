@@ -6,6 +6,7 @@ import { obtenerProducto, crearProducto, editarProducto, eliminarProducto } from
 import ReactLoading from 'react-loading';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [productos, setProductos] = useState([]);
@@ -156,8 +157,8 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
     _id: producto._id,
     name: producto.name,
-    brand: producto.type,
-    model: producto.amount,
+    type: producto.type,
+    amount: producto.amount
   });
 
   const actualizarProducto = async () => {
@@ -167,8 +168,8 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
       producto._id,
       {
         name: infoNuevoProducto.name,
-        brand: infoNuevoProducto.type,
-        model: infoNuevoProducto.amount,
+        type: infoNuevoProducto.type,
+        amount: infoNuevoProducto.amount
       },
       (response) => {
         console.log(response.data);
@@ -317,8 +318,8 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
     await crearProducto(
       {
         name: nuevoProducto.name,
-        brand: nuevoProducto.type,
-        model: nuevoProducto.amount,
+        type: nuevoProducto.type,
+        amount: nuevoProducto.amount
       },
       (response) => {
         console.log(response.data);
