@@ -20,6 +20,7 @@ function App() {
     domain="gestion-ventas-ants.us.auth0.com"
         clientId="fiWmCl0FnahkDEsEgeqKEG06XDzfc9OF"
         redirectUri={window.location.origin}
+        audience='api-autenticacion-gestion-ventas'
         >
     <div className="App">
       <Router>

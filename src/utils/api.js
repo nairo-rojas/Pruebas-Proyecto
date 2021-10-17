@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const getToken = () => {
+const getToken =()=>{
   return `Bearer ${localStorage.getItem('token')}`;
-};
+}
 
 export const obtenerProductos = async (successCallback, errorCallback) => {
   const options = {

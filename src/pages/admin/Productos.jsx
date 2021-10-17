@@ -36,6 +36,7 @@ const Productos = () => {
     }
   }, [ejecutarConsulta]);
 
+  
   useEffect(() => {
     //obtener lista de productos desde el backend
     if (mostrarTabla) {
