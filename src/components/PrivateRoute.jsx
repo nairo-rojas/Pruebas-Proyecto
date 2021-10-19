@@ -10,6 +10,7 @@ const PrivateRoute = ({ children }) => {
             const accessToken = await getAccessTokenSilently({
                 audience: `api-autenticacion-gestion-ventas`,
             });
+            
             localStorage.setItem("token", accessToken);
         };
         if (isAuthenticated) {

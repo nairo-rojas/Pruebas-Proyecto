@@ -14,7 +14,7 @@ const RutaSidebar = ({icono, ruta, nombre, usuario})=>{
       >
         {usuario ? (
           <>
-            <img src={usuario.picture} className='h-5 w-5 rounded-full' />
+            <img src={usuario.picture} alt='img-user' className='h-5 w-5 rounded-full' />
             {usuario.name}
           </>
         ) : (

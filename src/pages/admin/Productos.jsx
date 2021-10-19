@@ -116,9 +116,10 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Nombre del producto</th>
-                <th>Presentación del producto</th>
+                <th>Nombre</th>
+                <th>Presentación</th>
                 <th>Empaque del producto</th>
+                <th>Valor Unitario</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -143,6 +144,7 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
               <span>{el.name}</span>
               <span>{el.presentation}</span>
               <span>{el.package}</span>
+              <span>{el.unitValue}</span>
             </div>
           );
         })}
@@ -159,6 +161,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
     name: producto.name,
     presentation: producto.presentation,
     package: producto.package,
+    unitValue: producto.unitValue
   });
 
   const actualizarProducto = async () => {
@@ -170,6 +173,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
         name: infoNuevoProducto.name,
         presentation: infoNuevoProducto.presentation,
         package: infoNuevoProducto.package,
+        unitValue: infoNuevoProducto.unitValue
       },
       (response) => {
         console.log(response.data);
@@ -234,6 +238,16 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
               }
             />
           </td>
+          <td>
+            <input
+              className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+              type='number'
+              value={infoNuevoProducto.unitValue}
+              onChange={(e) =>
+                setInfoNuevoProducto({ ...infoNuevoProducto, unitValue: e.target.value })
+              }
+            />
+          </td>
         </>
       ) : (
         <>
@@ -241,6 +255,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
           <td>{producto.name}</td>
           <td>{producto.presentation}</td>
           <td>{producto.package}</td>
+          <td>{producto.unitValue}</td>
         </>
       )}
       <td>
@@ -320,6 +335,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
         name: nuevoProducto.name,
         presentation: nuevoProducto.presentation,
         package: nuevoProducto.package,
+        unitValue: nuevoProducto.unitValue,
       },
       (response) => {
         console.log(response.data);
@@ -372,6 +388,16 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             type='text'
             placeholder='Vacío'
+            required
+          />
+        </label>
+        <label className='flex flex-col' htmlFor='valorUnitario'>
+          Valor Unitario
+          <input
+            name='valorUnitario'
+            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+            type='number'
+            placeholder='$ 5000'
             required
           />
         </label>
