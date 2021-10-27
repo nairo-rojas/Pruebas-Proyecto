@@ -45,7 +45,7 @@ const Ventas = () => {
       formData[key] = value;
     });
 
-    console.log('form data', formData);
+    console.log('información del formulario', formData);
 
     const listaProductos = Object.keys(formData)
       .map((k) => {
@@ -54,10 +54,21 @@ const Ventas = () => {
         }
         return null;
       })
-      .filter((p) => p);
+      .filter((p)=> p);
+
+      console.log("Lista antes de cantidad", listaProductos)
+
+      Object.keys(formData).forEach((k)=>{
+        if(k.includes('cantidad')){
+          const indice = parseInt(k.split('_')[1]);
+          listaProductos[indice]['cantidad'] = formData[k];
+        }
+      });
+
+      console.log("Lista despues de cantidad", listaProductos)
 
     const datosVenta = {
-      vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
+      vendedor: vendedores.filter(v => v._id === formData.vendedor)[0],
       cantidad: formData.valor,
       productos: listaProductos,
     };
@@ -124,12 +135,12 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 
   const agregarNuevoProducto = () => {
     setFilasTabla([...filasTabla, productoAAgregar]);
-    setProductos(productos.filter((p) => p._id !== productoAAgregar._id));
+    setProductos(productos.filter(p => p._id !== productoAAgregar._id));
     setProductoAAgregar({});
   };
 
   const eliminarProducto = (productoAEliminar) => {
-    setFilasTabla(filasTabla.filter((p) => p._id !== productoAEliminar._id));
+    setFilasTabla(filasTabla.filter(p => p._id !== productoAEliminar._id));
     setProductos([...productos, productoAEliminar]);
   };
 
@@ -152,9 +163,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
           <select
             className='p-2'
             value={productoAAgregar._id ?? ''}
-            onChange={(e) =>
-              setProductoAAgregar(productos.filter((p) => p._id === e.target.value)[0])
-            }
+            onChange={(e) => setProductoAAgregar(productos.filter((p) => p._id === e.target.value)[0])}
           >
             <option disabled value=''>
               Seleccione un Producto
@@ -211,9 +220,11 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 
 const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
   const [producto, setProducto] = useState(prod);
+  
   useEffect(() => {
-    console.log('prod', producto);
+    console.log('producto:', producto);
   }, [producto]);
+
   return (
     <tr>
       <td>{producto._id}</td>
@@ -223,18 +234,12 @@ const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
       <td>{producto.price}</td>
       <td>
         <label htmlFor={`valor_${index}`}>
-          <input
-            type='number'
-            name={`cantidad_${index}`}
-            value={producto.cantidad}
+          <input type='number'name={`cantidad_${index}`}  value={producto.cantidad}
+          //ojo revisar, porque aqui se cerraba el label clase 23 1:14:33
             onChange={(e) => {
               modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
-              setProducto({
-                ...producto,
-                cantidad: e.target.value === '' ? '0' : e.target.value,
-                total:
-                  parseFloat(producto.valor) *
-                  parseFloat(e.target.value === '' ? '0' : e.target.value),
+              setProducto({...producto, cantidad: e.target.value === '' ? '0' : e.target.value,
+                total: parseFloat(producto.valor) * parseFloat(e.target.value === '' ? '0' : e.target.value),
               });
             }}
           />
@@ -243,10 +248,8 @@ const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
       <td>{producto.valor}</td>
       <td>{parseFloat(producto.total ?? 0)}</td>
       <td>
-        <i
-          onClick={() => eliminarProducto(producto)}
-          className='fas fa-minus text-red-500 cursor-pointer'
-        />
+        <i onClick={() => eliminarProducto(producto)}
+          className='fas fa-minus text-red-500 cursor-pointer'/>
       </td>
       <td className='hidden'>
         <input hidden defaultValue={producto._id} name={`producto_${index}`} />
