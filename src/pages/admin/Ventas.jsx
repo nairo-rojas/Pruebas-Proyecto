@@ -83,7 +83,7 @@ const Ventas = () => {
               Seleccione un Vendedor
             </option>
             {vendedores.map((el) => {
-              return <option key={nanoid()} value={el._id}>{`${el.email}`}</option>;
+              return <option key={nanoid()} value={el._id}>{`${el.name} ${el.lastname}`}</option>;
             })}
           </select>
         </label>
@@ -164,7 +164,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
                 <option
                   key={nanoid()}
                   value={el._id}
-                >{`${el.name} ${el.presentation} ${el.package} ${el.unitValue}`}</option>
+                >{`${el.name} ${el.presentation} ${el.package} ${el.price}`}</option>
               );
             })}
           </select>
@@ -220,7 +220,7 @@ const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
       <td>{producto.name}</td>
       <td>{producto.presentation}</td>
       <td>{producto.package}</td>
-      <td>{producto.unitValue}</td>
+      <td>{producto.price}</td>
       <td>
         <label htmlFor={`valor_${index}`}>
           <input

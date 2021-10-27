@@ -15,6 +15,7 @@ export const obtenerProductos = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+
 export const crearProducto = async (data, successCallback, errorCallback) => {
   const options = {
     method: 'POST',
@@ -29,6 +30,7 @@ export const editarProducto = async (id, data, successCallback, errorCallback) =
   const options = {
     method: 'PATCH',
     url: `http://localhost:5000/productos/${id}/`,
+    //url: `http://localhost:5000/productos/editar/`,
     headers: { 'Content-Type': 'application/json', Authorization: getToken() },
     data,
   };

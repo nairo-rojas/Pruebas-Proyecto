@@ -9,10 +9,11 @@ import Index from 'pages/Index';
 import Admin from 'pages/admin/Index';
 import Productos from 'pages/admin/Productos';
 import Usuarios from 'pages/admin/Usuarios';
-import Ventas from 'pages/admin/Ventas'
+import Ventas from 'pages/admin/Ventas';
 import Login from 'pages/auth/login';
 import Registro from 'pages/auth/registro';
 import { Auth0Provider } from '@auth0/auth0-react';
+
 
 function App() {
   return (

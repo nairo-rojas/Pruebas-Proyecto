@@ -144,7 +144,7 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
               <span>{el.name}</span>
               <span>{el.presentation}</span>
               <span>{el.package}</span>
-              <span>{el.unitValue}</span>
+              <span>{el.price}</span>
             </div>
           );
         })}
@@ -161,7 +161,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
     name: producto.name,
     presentation: producto.presentation,
     package: producto.package,
-    unitValue: producto.unitValue
+    price: producto.price
   });
 
   const actualizarProducto = async () => {
@@ -173,7 +173,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
         name: infoNuevoProducto.name,
         presentation: infoNuevoProducto.presentation,
         package: infoNuevoProducto.package,
-        unitValue: infoNuevoProducto.unitValue
+        price: infoNuevoProducto.price
       },
       (response) => {
         console.log(response.data);
@@ -242,9 +242,9 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='number'
-              value={infoNuevoProducto.unitValue}
+              value={infoNuevoProducto.price}
               onChange={(e) =>
-                setInfoNuevoProducto({ ...infoNuevoProducto, unitValue: e.target.value })
+                setInfoNuevoProducto({ ...infoNuevoProducto, price: e.target.value })
               }
             />
           </td>
@@ -255,7 +255,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
           <td>{producto.name}</td>
           <td>{producto.presentation}</td>
           <td>{producto.package}</td>
-          <td>{producto.unitValue}</td>
+          <td>{producto.price}</td>
         </>
       )}
       <td>
@@ -335,7 +335,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
         name: nuevoProducto.name,
         presentation: nuevoProducto.presentation,
         package: nuevoProducto.package,
-        unitValue: nuevoProducto.unitValue,
+        price: nuevoProducto.price,
       },
       (response) => {
         console.log(response.data);
@@ -391,12 +391,13 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
             required
           />
         </label>
-        <label className='flex flex-col' htmlFor='valorUnitario'>
+        <label className='flex flex-col' htmlFor='price'>
           Valor Unitario
           <input
-            name='valorUnitario'
+            name='price'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             type='number'
+            min='5000'
             placeholder='$ 5000'
             required
           />
