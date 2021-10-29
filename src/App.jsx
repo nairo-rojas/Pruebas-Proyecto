@@ -20,7 +20,8 @@ function App() {
     <Auth0Provider
     domain="gestion-ventas-ants.us.auth0.com"
         clientId="fiWmCl0FnahkDEsEgeqKEG06XDzfc9OF"
-        redirectUri={window.location.origin}
+        //redirectUri={window.location.origin}
+        redirectUri='http://localhost:3000/admin'
         audience='api-autenticacion-gestion-ventas'
         >
     <div className="App">
