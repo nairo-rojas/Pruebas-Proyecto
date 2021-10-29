@@ -1,5 +1,5 @@
 
-//import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './styles/App.css';
 import PrivateLayout from 'layouts/PrivateLayout';
@@ -13,18 +13,22 @@ import Ventas from 'pages/admin/Ventas';
 import Login from 'pages/auth/login';
 import Registro from 'pages/auth/registro';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { UserContext } from 'context/userContext';
+
+
 
 
 function App() {
+  const [userData, setUserData] = useState({});
   return (
     <Auth0Provider
     domain="gestion-ventas-ants.us.auth0.com"
         clientId="fiWmCl0FnahkDEsEgeqKEG06XDzfc9OF"
-        //redirectUri={window.location.origin}
-        redirectUri='http://localhost:3000/admin'
+       redirectUri='http://localhost:3000/admin'
         audience='api-autenticacion-gestion-ventas'
         >
     <div className="App">
+      <UserContext.Provider value={{userData, setUserData}}>
       <Router>
         <Switch>
           <Route path={['/admin/', '/admin/Productos', '/admin/Usuarios', '/admin/Ventas']}>
@@ -68,6 +72,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      </UserContext.Provider>
     </div>
 
     </Auth0Provider>

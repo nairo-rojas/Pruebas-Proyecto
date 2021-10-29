@@ -1,4 +1,4 @@
-import { User } from '@auth0/auth0-spa-js';
+import PrivateComponent from 'components/PrivateComponent';
 import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react'
 import { obtenerUsuarios, editarUsuario } from 'utils/api';
@@ -22,7 +22,11 @@ const Usuarios = () => {
     }, []);
 
     return (
-        <div>Admin Usuarios
+        <div>
+            <div>Admin Usuarios</div>
+            <PrivateComponent roleList={['admin']}>
+                <button className='bg-red-400 border-gray-700 rounded-xl font-bold text-white p-2'>JEFE</button>
+            </PrivateComponent>
             <table className='tabla'>
                 <tbody>
                     {usuarios.map(user => {

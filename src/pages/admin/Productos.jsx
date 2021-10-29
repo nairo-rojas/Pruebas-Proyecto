@@ -5,6 +5,7 @@ import { Dialog, Tooltip } from '@material-ui/core';
 import { obtenerProductos, crearProducto, editarProducto, eliminarProducto } from 'utils/api';
 import ReactLoading from 'react-loading';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateComponent from 'components/PrivateComponent';
 
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -120,7 +121,9 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
                 <th>Presentación</th>
                 <th>Empaque del producto</th>
                 <th>Valor Unitario</th>
+                <PrivateComponent roleList={['admin']}>
                 <th>Acciones</th>
+                </PrivateComponent>
               </tr>
             </thead>
             <tbody>
@@ -258,6 +261,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
           <td>{producto.price}</td>
         </>
       )}
+      <PrivateComponent roleList={["admin"]}>
       <td>
         <div className='flex w-full justify-around'>
           {edit ? (
@@ -314,6 +318,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
           </div>
         </Dialog>
       </td>
+      </PrivateComponent>
     </tr>
   );
 };
