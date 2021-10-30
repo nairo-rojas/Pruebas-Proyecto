@@ -1,24 +1,13 @@
-import CardRazaPerros from 'components/cardRazaPerros';
-import Rhodesian from 'media/Rodesian.ico';
-import BorderCollie from 'media/Border-collie.ico';
+//import { useDarkMode } from 'context/darkMode';
+import React from 'react';
 
+const Index = () => {
+  //const { darkMode } = useDarkMode();
+  return (
+    <div className='flex flex-col h-full bg-gray-50 text-center justify-center'>
+     Plataforma de Gestion de Ventas
+    </div>
+  );
+};
 
-function Index(){
-    return(
-     <section>
-      <h1 className="title">Razas de Perros</h1>
-        <ul className="bleedCardContainer ">
-         <CardRazaPerros nombreRaza= "Border-collie" imagen = {BorderCollie}/>
-         <CardRazaPerros nombreRaza= "Rhodesia" imagen = {Rhodesian}/>
-         <CardRazaPerros nombreRaza= "Rhodesia" imagen = {Rhodesian}/>
-         <CardRazaPerros nombreRaza= "Rhodesia" imagen = {Rhodesian}/>
-         <CardRazaPerros nombreRaza= "Border-collie" imagen = {BorderCollie}/>
-         <CardRazaPerros nombreRaza= "Border-collie" imagen = {BorderCollie}/>
-         <CardRazaPerros nombreRaza= "Border-collie" imagen = {BorderCollie}/>
-        </ul>
-     </section>
-         
-     
-    )
-}
 export default Index;
