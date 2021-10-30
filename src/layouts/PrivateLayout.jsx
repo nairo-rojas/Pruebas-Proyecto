@@ -8,7 +8,7 @@ import { useUser } from 'context/userContext';
 
 
 const PrivateLayout = ({ children }) => {
-  const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently, logout } = useAuth0();
   const [loadinUserInformation, setLoadinUserInformation] = useState(false);
   const { setUserData } = useUser();
 
@@ -19,7 +19,7 @@ const PrivateLayout = ({ children }) => {
       const accessToken = await getAccessTokenSilently({
         audience: `api-autenticacion-gestion-ventas`,
       });
-       //2. Recibe token de Auth0 
+      //2. Recibe token de Auth0 
       localStorage.setItem("token", accessToken);
       console.log("Info token;", accessToken);
       //3. Enviar token al backen
@@ -32,18 +32,17 @@ const PrivateLayout = ({ children }) => {
         (err) => {
           console.log("error", err);
           setLoadinUserInformation(false);
+          logout({ returnTo: 'http://localhost:3000/admin' });
 
         });
-
-
     };
     if (isAuthenticated) {
       fetchAuth0Token();
     }
-  }, [isAuthenticated, getAccessTokenSilently]);
+  }, [isAuthenticated, getAccessTokenSilently, logout, setUserData]);
 
 
-  if (isLoading || loadinUserInformation) 
+  if (isLoading || loadinUserInformation)
     return <ReactLoading type='cylon' color='#abc123' height={667} width={375} />
   if (!isAuthenticated) {
     return loginWithRedirect()

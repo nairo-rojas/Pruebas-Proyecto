@@ -55,7 +55,7 @@ const Productos = () => {
     }
   }, [mostrarTabla]);
   return (
-    <div className='flex h-full w-full flex-col items-center justify-start p-8'>
+    <div className='flex h-full w-full flex-col itpacks-center justify-start p-8'>
       <div className='flex flex-col w-full'>
         <h2 className='text-3xl font-extrabold text-gray-900'>
           Página de administración de productos
@@ -94,14 +94,14 @@ const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
 
   useEffect(() => {
     setProductosFiltrados(
-      listaProductos.filter((elemento) => {
-        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+      listaProductos.filter((elpackento) => {
+        return JSON.stringify(elpackento).toLowerCase().includes(busqueda.toLowerCase());
       })
     );
   }, [busqueda, listaProductos]);
 
   return (
-    <div className='flex flex-col items-center justify-center w-full'>
+    <div className='flex flex-col itpacks-center justify-center w-full'>
       <input
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
@@ -301,7 +301,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             <h1 className='text-gray-900 text-2xl font-bold'>
               ¿Está seguro de querer eliminar el producto?
             </h1>
-            <div className='flex w-full items-center justify-center my-4'>
+            <div className='flex w-full itpacks-center justify-center my-4'>
               <button
                 onClick={() => deleteProduct()}
                 className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
@@ -355,7 +355,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
   };
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='flex flex-col itpacks-center justify-center'>
       <h2 className='text-2xl font-extrabold text-gray-800'>Crear nuevo producto</h2>
       <form ref={form} onSubmit={submitForm} className='flex flex-col'>
         <label className='flex flex-col' htmlFor='nombre'>
@@ -391,7 +391,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
           <input
             name='package'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            type='text'
+            type='number'
             placeholder='Vacío'
             required
           />

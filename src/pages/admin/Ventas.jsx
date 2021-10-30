@@ -56,17 +56,7 @@ const Ventas = () => {
       })
       .filter((p)=> p);
 
-      console.log("Lista antes de cantidad", listaProductos)
-
-      Object.keys(formData).forEach((k)=>{
-        if(k.includes('cantidad')){
-          const indice = parseInt(k.split('_')[1]);
-          listaProductos[indice]['cantidad'] = formData[k];
-        }
-      });
-
-      console.log("Lista despues de cantidad", listaProductos)
-
+      
     const datosVenta = {
       vendedor: vendedores.filter(v => v._id === formData.vendedor)[0],
       cantidad: formData.valor,
